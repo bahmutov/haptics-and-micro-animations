@@ -35,7 +35,7 @@ const imageUrl =
 
 export default function App() {
   const [isFavorite, setIsFavourite] = React.useState(false)
-  const [quantity, setQuantity] = React.useState(1)
+  const [quantity, setQuantity] = React.useState(0)
   const [cartCount, setCartCount] = React.useState(0)
   const [isLoading, setIsLoading] = React.useState(false)
   const [currentSound, setSound] = React.useState()
@@ -213,23 +213,26 @@ const QuantityItem = ({ isSelected, onPress, children, isEnabled }) => {
       onPress={onPress}
       accessibilityLabel="Quantity"
     >
-      <View
-        style={[
-          styles.quantityItem,
-          styles.selectedQuantity /*, selectedStyle*/,
-        ]}
-      >
-        <Text style={styles.selectedQuantityText}>{children}</Text>
-      </View>
-      <View
-        style={[
-          styles.quantityItem,
-          styles.notSelectedQuantity,
-          /*notSelectedStyle,*/
-        ]}
-      >
-        <Text style={styles.notSelectedQuantityText}>{children}</Text>
-      </View>
+      {isSelected ? (
+        <View
+          style={[
+            styles.quantityItem,
+            styles.selectedQuantity /*, selectedStyle*/,
+          ]}
+        >
+          <Text style={styles.selectedQuantityText}>{children}</Text>
+        </View>
+      ) : (
+        <View
+          style={[
+            styles.quantityItem,
+            styles.notSelectedQuantity,
+            /*notSelectedStyle,*/
+          ]}
+        >
+          <Text style={styles.notSelectedQuantityText}>{children}</Text>
+        </View>
+      )}
     </Pressable>
   )
 }
